@@ -15,23 +15,38 @@ else
     exit 1
 fi
 
-# Check pip
+# Check if venv exists
 echo ""
-echo "📋 Checking pip..."
-if command -v pip3 &> /dev/null || command -v pip &> /dev/null; then
-    echo "✅ pip is available"
+if [ -d "venv" ]; then
+    echo "📦 Virtual environment already exists"
 else
-    echo "❌ pip not found! Please install pip"
-    exit 1
+    echo "📦 Creating virtual environment..."
+    if python3 -m venv venv; then
+        echo "✅ Virtual environment created"
+    else
+        echo "❌ Failed to create virtual environment"
+        exit 1
+    fi
 fi
+
+# Activate virtual environment
+echo ""
+echo "🔌 Activating virtual environment..."
+source venv/bin/activate
+
+# Upgrade pip
+echo ""
+echo "📦 Upgrading pip..."
+python -m pip install --upgrade pip --quiet
 
 # Install dependencies
 echo ""
 echo "📦 Installing dependencies..."
-if python3 -m pip install -r requirements.txt; then
+if pip install -r requirements.txt; then
     echo "✅ Dependencies installed successfully"
 else
     echo "❌ Failed to install dependencies"
+    deactivate
     exit 1
 fi
 
@@ -49,6 +64,7 @@ echo "To start the visualizer, run:"
 echo "  ./run.sh"
 echo ""
 echo "Or manually:"
+echo "  source venv/bin/activate"
 echo "  streamlit run app.py"
 echo ""
 echo "The app will open at: http://localhost:8501"
