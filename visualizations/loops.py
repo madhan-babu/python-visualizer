@@ -619,24 +619,79 @@ while index < len(items) and not found:
         print("Access granted!")
         ```
         
-        4. **FizzBuzz (classic!):**
+        4. **Print Each Item in a List:**
         ```python
-        for i in range(1, 21):
-            if i % 3 == 0 and i % 5 == 0:
-                print("FizzBuzz")
-            elif i % 3 == 0:
-                print("Fizz")
-            elif i % 5 == 0:
-                print("Buzz")
-            else:
-                print(i)
+        # Loop through list items
+        friends = ["Emma", "Noah", "Olivia", "Liam"]
+        
+        for friend in friends:
+            print(f"Hello, {friend}!")
+        # Output:
+        # Hello, Emma!
+        # Hello, Noah!
+        # Hello, Olivia!
+        # Hello, Liam!
         ```
         
-        **Challenge:**
-        Create a program that:
-        - Asks user for a number
-        - Prints the multiplication table for that number (1-10)
-        - Uses a for loop
-        - Formats output nicely: "5 x 1 = 5"
+        5. **Loop Through Dictionary Items:**
+        ```python
+        # Show all key-value pairs
+        prices = {
+            "apple": 1.50,
+            "banana": 0.75,
+            "orange": 1.25
+        }
+        
+        for fruit, price in prices.items():
+            print(f"{fruit} costs ${price}")
+        # Output:
+        # apple costs $1.50
+        # banana costs $0.75
+        # orange costs $1.25
+        ```
+        
+        6. **Count Items in Locker:**
+        ```python
+        # What's in your locker?
+        locker = {
+            "books": 4,
+            "pencils": 12,
+            "notebook": 3
+        }
+        
+        print("My locker has:")
+        for item, count in locker.items():
+            print(f"  {item}: {count}")
+        # Output:
+        # My locker has:
+        #   books: 4
+        #   pencils: 12
+        #   notebook: 3
+        ```
+        
+        7. **Sum All Numbers in List:**
+        ```python
+        # Add up all numbers
+        numbers = [10, 20, 30, 40, 50]
+        total = 0
+        
+        for num in numbers:
+            total = total + num
+        
+        print(f"Total: {total}")  # 150
+        ```
+        
+        8. **Find Largest Number:**
+        ```python
+        # Find the biggest number
+        numbers = [45, 23, 89, 12, 67]
+        largest = numbers[0]
+        
+        for num in numbers:
+            if num > largest:
+                largest = num
+        
+        print(f"Largest: {largest}")  # 89
+        ```
         """)
 

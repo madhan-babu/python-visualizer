@@ -533,46 +533,94 @@ def show():
     # Practice exercises
     with st.expander("💪 Practice Exercises", expanded=False):
         st.markdown("""
-        **Try these in Python:**
+        **Try these fun challenges:**
         
-        1. **Create and Access:**
+        1. **Your Profile:**
         ```python
-        student = {"name": "Bob", "age": 16, "grade": 85}
-        print(student["name"])        # Access
-        print(student.get("grade"))   # Safe access
+        # Create a dictionary about yourself
+        me = {
+            "name": "Sam",
+            "age": 12,
+            "favorite_color": "blue",
+            "hobby": "gaming"
+        }
+        
+        print(f"Hi, I'm {me['name']}")
+        print(f"I'm {me['age']} years old")
+        print(f"I love {me['hobby']}")
         ```
         
-        2. **Add and Update:**
+        2. **Pet Information:**
         ```python
-        student["email"] = "bob@school.com"  # Add
-        student["age"] = 17                   # Update
+        # Store info about a pet
+        pet = {
+            "name": "Max",
+            "type": "dog",
+            "age": 3
+        }
+        
+        # Add new information
+        pet["color"] = "brown"
+        
+        # Update age (birthday!)
+        pet["age"] = 4
+        
+        print(pet)
         ```
         
-        3. **Loop Through:**
+        3. **Game Character:**
         ```python
-        for key, value in student.items():
-            print(f"{key}: {value}")
+        # Create a game character
+        character = {
+            "name": "Hero",
+            "health": 100,
+            "level": 1,
+            "coins": 50
+        }
+        
+        # Character found coins!
+        character["coins"] = character["coins"] + 10
+        
+        # Level up!
+        character["level"] = character["level"] + 1
+        
+        print(f"{character['name']} is now level {character['level']}")
+        print(f"Total coins: {character['coins']}")
         ```
         
-        4. **Count Occurrences:**
+        4. **Check What's Inside:**
         ```python
-        words = ["apple", "banana", "apple", "orange", "banana", "apple"]
-        count = {}
+        # Check if keys exist
+        scores = {"math": 95, "science": 88, "english": 92}
         
-        for word in words:
-            if word in count:
-                count[word] += 1
-            else:
-                count[word] = 1
+        if "math" in scores:
+            print(f"Math score: {scores['math']}")
         
-        print(count)  # {'apple': 3, 'banana': 2, 'orange': 1}
+        if "history" in scores:
+            print("Has history score")
+        else:
+            print("No history score yet")
         ```
         
-        **Challenge:** Create a program that:
-        - Stores information about 3 books (title, author, pages)
-        - Each book is a dictionary
-        - Store all books in a list
-        - Print details of each book
-        - Find the book with most pages
+        5. **School Locker:**
+        ```python
+        # What's in your locker?
+        locker = {
+            "books": 4,
+            "pencils": 12,
+            "notebook": 3
+        }
+        
+        # Take out a notebook
+        locker["notebook"] = locker["notebook"] - 1
+        
+        # Add more pencils
+        locker["pencils"] = locker["pencils"] + 5
+        
+        # Check individual items
+        print(f"Books: {locker['books']}")
+        print(f"Pencils: {locker['pencils']}")
+        print(f"Notebooks: {locker['notebook']}")
+        ```
         """)
 

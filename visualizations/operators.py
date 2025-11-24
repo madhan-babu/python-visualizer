@@ -664,9 +664,5 @@ print(can_ride)  # True
         score *= 2   # Bonus multiplier
         print(score)  # 120
         ```
-        
-        **Challenge:** Write a program that checks if someone can watch a movie:
-        - Must be 13 or older OR have parent permission
-        - Must have money for ticket (at least $10)
         """)
 

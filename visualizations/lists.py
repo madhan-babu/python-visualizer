@@ -511,49 +511,64 @@ def show():
     # Practice exercises
     with st.expander("💪 Practice Exercises", expanded=False):
         st.markdown("""
-        **Try these in Python:**
+        **Try these fun challenges:**
         
-        1. **Create and Display:**
+        1. **My Favorite Things:**
         ```python
-        fruits = ["apple", "banana", "cherry"]
-        print(fruits[0])      # First item
-        print(fruits[-1])     # Last item
-        print(len(fruits))    # Length
+        # Create a list of your favorite things
+        favorites = ["pizza", "games", "Python"]
+        print("My first favorite:", favorites[0])
+        print("My last favorite:", favorites[-1])
+        print("Total favorites:", len(favorites))
         ```
         
-        2. **Add Items:**
+        2. **Shopping List:**
         ```python
-        numbers = [1, 2, 3]
-        numbers.append(4)          # [1, 2, 3, 4]
-        numbers.insert(0, 0)       # [0, 1, 2, 3, 4]
-        numbers.extend([5, 6])     # [0, 1, 2, 3, 4, 5, 6]
+        # Start with some items
+        shopping = ["milk", "eggs", "bread"]
+        print("Original list:", shopping)
+        
+        # Add more items
+        shopping.append("cheese")
+        shopping.append("apples")
+        print("After shopping:", shopping)
         ```
         
-        3. **Remove Items:**
+        3. **High Scores:**
         ```python
+        # Keep track of game scores
+        scores = [100, 250, 180, 320]
+        print("All scores:", scores)
+        print("Highest score:", max(scores))
+        print("Lowest score:", min(scores))
+        print("Total points:", sum(scores))
+        ```
+        
+        4. **Remove Items:**
+        ```python
+        # Start with a to-do list
+        tasks = ["homework", "clean room", "practice", "read"]
+        print("To-do:", tasks)
+        
+        # Complete a task (remove it)
+        tasks.remove("homework")
+        print("After homework:", tasks)
+        
+        # Complete last task
+        tasks.pop()
+        print("After reading:", tasks)
+        ```
+        
+        5. **Check if Item Exists:**
+        ```python
+        # See if something is in your list
         colors = ["red", "blue", "green", "yellow"]
-        colors.pop()           # Removes "yellow"
-        colors.remove("blue")  # Removes "blue"
-        ```
         
-        4. **Loop Through List:**
-        ```python
-        for fruit in fruits:
-            print(fruit)
-        ```
+        if "blue" in colors:
+            print("We have blue!")
         
-        5. **List Comprehension (Advanced):**
-        ```python
-        numbers = [1, 2, 3, 4, 5]
-        doubled = [n * 2 for n in numbers]
-        print(doubled)  # [2, 4, 6, 8, 10]
+        if "purple" not in colors:
+            print("We don't have purple")
         ```
-        
-        **Challenge:** Create a program that:
-        - Stores your 5 favorite foods in a list
-        - Prints each food with its number (1, 2, 3...)
-        - Lets user add a new food
-        - Lets user remove a food
-        - Shows updated list
         """)
 

@@ -357,9 +357,5 @@ int("10") > 5         # ✅ = True
         c = "5" * 3      # What is c?
         d = 5 * 3        # What is d?
         ```
-        
-        **Challenge:** Create a program that asks for your age (string input) 
-        and calculates how old you'll be in 10 years (needs math).
-        Hint: You'll need type conversion!
         """)
 

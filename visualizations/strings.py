@@ -658,58 +658,69 @@ print(message)''', language="python")
     # Practice exercises
     with st.expander("💪 Practice Exercises", expanded=False):
         st.markdown("""
-        **Try these challenges:**
+        **Try these fun challenges:**
         
-        1. **Name Formatter:**
+        1. **Make Your Name Tag:**
         ```python
-        first = "john"
-        last = "DOE"
-        
-        # Format as "John Doe"
-        full_name = first.capitalize() + " " + last.capitalize()
-        print(full_name)
+        # Create a fancy name tag
+        name = "Emma"
+        line = "*" * 20
+        print(line)
+        print(f"* Hello, I'm {name}! *")
+        print(line)
         ```
         
-        2. **Palindrome Checker:**
+        2. **Shout Your Name:**
         ```python
-        word = "racecar"
-        is_palindrome = word == word[::-1]
-        print(is_palindrome)  # True
+        # Make your name uppercase and repeat it
+        name = "Sam"
+        loud_name = name.upper()
+        print(loud_name * 3)  # SAMSAMAM
         ```
         
-        3. **Email Validator:**
+        3. **Reverse a Word:**
         ```python
-        email = "user@example.com"
-        
-        has_at = "@" in email
-        has_dot = "." in email
-        is_valid = has_at and has_dot
-        
-        print(f"Valid: {is_valid}")
+        # Write a word backwards
+        word = "Python"
+        backwards = word[::-1]
+        print(f"{word} backwards is {backwards}")
+        # Output: Python backwards is nohtyP
         ```
         
-        4. **Word Counter:**
+        4. **Check Your Password Length:**
         ```python
-        sentence = "Python is fun and Python is powerful"
-        words = sentence.split()
-        python_count = sentence.lower().count("python")
+        # Make sure password is long enough
+        password = "mypass123"
+        length = len(password)
         
-        print(f"Total words: {len(words)}")
-        print(f"'Python' appears: {python_count} times")
+        if length >= 8:
+            print("Good password!")
+        else:
+            print("Too short! Need at least 8 characters")
         ```
         
-        5. **Acronym Generator:**
+        5. **Make a Banner:**
         ```python
-        phrase = "Laugh Out Loud"
-        words = phrase.split()
-        acronym = "".join([word[0] for word in words])
-        print(acronym.upper())  # LOL
+        # Create a cool banner with your message
+        message = "WELCOME"
+        border = "=" * len(message)
+        
+        print(border)
+        print(message)
+        print(border)
+        # Output:
+        # =======
+        # WELCOME
+        # =======
         ```
         
-        **Challenge:** Create a program that:
-        - Takes a full name (first, middle, last)
-        - Converts to title case
-        - Creates username (first 3 letters of first name + last name, lowercase)
-        - Example: "john william smith" → Username: "johsmith"
+        6. **Count Letters in Your Name:**
+        ```python
+        # Find how many times a letter appears
+        name = "Hannah"
+        letter = "n"
+        count = name.lower().count(letter.lower())
+        print(f"The letter '{letter}' appears {count} times in {name}")
+        ```
         """)
 

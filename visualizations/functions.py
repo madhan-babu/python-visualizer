@@ -355,46 +355,47 @@ print(result.upper())  # Can use the result!""", language="python")
         st.info("""
         **Return multiple values using a tuple:**
         ```python
-        def get_stats(numbers):
-            total = sum(numbers)
-            average = total / len(numbers)
-            return total, average  # Returns tuple
+        def get_name_and_age():
+            name = "Alice"
+            age = 12
+            return name, age  # Returns two values
         
-        t, avg = get_stats([10, 20, 30])
-        print(t)    # 60
-        print(avg)  # 20.0
+        person_name, person_age = get_name_and_age()
+        print(person_name)  # Alice
+        print(person_age)   # 12
         ```
         """)
         
-        numbers_input = st.text_input("Enter numbers (comma-separated):", value="10, 20, 30, 40", key="multi_return_input")
-        
-        if st.button("📊 Calculate Stats", key="calc_stats_btn"):
-            try:
-                numbers = [float(x.strip()) for x in numbers_input.split(",")]
-                total = sum(numbers)
-                average = total / len(numbers)
-                minimum = min(numbers)
-                maximum = max(numbers)
-                
-                st.success("✅ Function returned 4 values!")
-                
-                col_stat1, col_stat2, col_stat3, col_stat4 = st.columns(4)
-                with col_stat1:
-                    st.metric("Total", total)
-                with col_stat2:
-                    st.metric("Average", round(average, 2))
-                with col_stat3:
-                    st.metric("Min", minimum)
-                with col_stat4:
-                    st.metric("Max", maximum)
-                
-                st.code(f"""def get_stats(numbers):
-    return sum(numbers), sum(numbers)/len(numbers), min(numbers), max(numbers)
+        st.markdown("**Example: Calculate Rectangle Dimensions**")
+        st.code("""def rectangle_info(width, height):
+    area = width * height
+    perimeter = 2 * (width + height)
+    return area, perimeter
 
-total, avg, min_val, max_val = get_stats({numbers})
-# total = {total}, avg = {round(average, 2)}, min = {minimum}, max = {maximum}""", language="python")
-            except:
-                st.error("❌ Invalid input! Use numbers separated by commas.")
+# Use it:
+a, p = rectangle_info(5, 3)
+print(f"Area: {a}, Perimeter: {p}")""", language="python")
+        
+        col_rect1, col_rect2 = st.columns(2)
+        with col_rect1:
+            rect_width = st.number_input("Width:", value=5, min_value=1, key="rect_width")
+        with col_rect2:
+            rect_height = st.number_input("Height:", value=3, min_value=1, key="rect_height")
+        
+        if st.button("📊 Calculate", key="calc_rect_btn"):
+            area = rect_width * rect_height
+            perimeter = 2 * (rect_width + rect_height)
+            
+            st.success("✅ Function returned 2 values!")
+            
+            col_result1, col_result2 = st.columns(2)
+            with col_result1:
+                st.metric("Area", area)
+            with col_result2:
+                st.metric("Perimeter", perimeter)
+            
+            st.code(f"""area, perimeter = rectangle_info({int(rect_width)}, {int(rect_height)})
+# area = {int(area)}, perimeter = {int(perimeter)}""", language="python")
     
     # ============================================
     # TAB 4: PARAMETERS
@@ -493,38 +494,40 @@ total, avg, min_val, max_val = get_stats({numbers})
             st.info("""
             **Functions can have many parameters**
             ```python
-            def create_user(name, age, email, country):
-                return {
-                    "name": name,
-                    "age": age,
-                    "email": email,
-                    "country": country
-                }
+            def introduce_student(name, age, grade, favorite_subject):
+                message = f"Hi! I'm {name}, {age} years old."
+                message += f" I'm in grade {grade}."
+                message += f" My favorite subject is {favorite_subject}!"
+                return message
             ```
             """)
             
             col_mult1, col_mult2, col_mult3, col_mult4 = st.columns(4)
             with col_mult1:
-                user_name = st.text_input("Name:", value="Alice", key="user_name")
+                student_name = st.text_input("Name:", value="Alice", key="student_name")
             with col_mult2:
-                user_age = st.number_input("Age:", value=15, min_value=1, key="user_age")
+                student_age = st.number_input("Age:", value=12, min_value=5, max_value=18, key="student_age")
             with col_mult3:
-                user_email = st.text_input("Email:", value="alice@example.com", key="user_email")
+                student_grade = st.number_input("Grade:", value=7, min_value=1, max_value=12, key="student_grade")
             with col_mult4:
-                user_country = st.text_input("Country:", value="USA", key="user_country")
+                student_subject = st.text_input("Favorite Subject:", value="Math", key="student_subject")
             
-            if st.button("👤 Create User", key="create_user_btn"):
-                st.success(f"✅ Called: `create_user({repr(user_name)}, {int(user_age)}, {repr(user_email)}, {repr(user_country)})`")
+            if st.button("👤 Introduce Student", key="introduce_student_btn"):
+                st.success(f"✅ Called: `introduce_student({repr(student_name)}, {int(student_age)}, {int(student_grade)}, {repr(student_subject)})`")
                 
-                user_dict = {
-                    "name": user_name,
-                    "age": int(user_age),
-                    "email": user_email,
-                    "country": user_country
-                }
+                intro_message = f"Hi! I'm {student_name}, {int(student_age)} years old. "
+                intro_message += f"I'm in grade {int(student_grade)}. "
+                intro_message += f"My favorite subject is {student_subject}!"
                 
-                st.json(user_dict)
-                st.code(f"user = create_user({repr(user_name)}, {int(user_age)}, {repr(user_email)}, {repr(user_country)})\nprint(user)", language="python")
+                st.info(intro_message)
+                st.code(f"""def introduce_student(name, age, grade, subject):
+    message = f"Hi! I'm {{name}}, {{age}} years old."
+    message += f" I'm in grade {{grade}}."
+    message += f" My favorite subject is {{subject}}!"
+    return message
+
+intro = introduce_student("{student_name}", {int(student_age)}, {int(student_grade)}, "{student_subject}")
+print(intro)""", language="python")
         
         st.markdown("---")
         st.markdown("#### 🎨 Parameter Best Practices")
@@ -556,14 +559,14 @@ total, avg, min_val, max_val = get_stats({numbers})
         st.markdown("### 🎯 Real-World Function Examples")
         
         example_category = st.selectbox("Choose category:", 
-                                       ["Math Functions", "String Functions", "List Functions", "Validation Functions"],
+                                       ["Math Functions", "String Functions", "Validation Functions"],
                                        key="example_category")
         
         if example_category == "Math Functions":
             st.markdown("#### 🔢 Math Functions")
             
             math_func = st.radio("Choose function:", 
-                                ["calculate_circle_area", "fahrenheit_to_celsius", "is_prime"],
+                                ["calculate_circle_area", "fahrenheit_to_celsius", "double_number"],
                                 key="math_func_choice")
             
             if math_func == "calculate_circle_area":
@@ -595,34 +598,37 @@ print(f"{temp_c}°C")""", language="python")
                     temp_c = (temp_f - 32) * 5/9
                     st.success(f"{temp_f}°F = {temp_c:.2f}°C")
             
-            elif math_func == "is_prime":
-                st.code("""def is_prime(number):
-    if number < 2:
-        return False
-    for i in range(2, int(number ** 0.5) + 1):
-        if number % i == 0:
-            return False
-    return True
+            elif math_func == "double_number":
+                st.code("""def double_number(num):
+    # Multiply any number by 2
+    result = num * 2
+    return result
+
+def triple_number(num):
+    # Multiply any number by 3
+    result = num * 3
+    return result
 
 # Usage:
-print(is_prime(17))  # True
-print(is_prime(20))  # False""", language="python")
+x = 7
+doubled = double_number(x)
+tripled = triple_number(x)
+print(f"{x} doubled is {doubled}")
+print(f"{x} tripled is {tripled}")""", language="python")
                 
-                check_num = st.number_input("Number to check:", value=17, min_value=1, key="prime_num")
-                if st.button("🔍 Check Prime", key="check_prime_btn"):
-                    if check_num < 2:
-                        is_prime_result = False
-                    else:
-                        is_prime_result = True
-                        for i in range(2, int(check_num ** 0.5) + 1):
-                            if check_num % i == 0:
-                                is_prime_result = False
-                                break
+                test_num = st.number_input("Enter a number:", value=7, key="double_num")
+                if st.button("🔢 Calculate", key="calc_double_btn"):
+                    doubled = test_num * 2
+                    tripled = test_num * 3
                     
-                    if is_prime_result:
-                        st.success(f"✅ {int(check_num)} is a prime number!")
-                    else:
-                        st.error(f"❌ {int(check_num)} is NOT a prime number")
+                    col_d1, col_d2 = st.columns(2)
+                    with col_d1:
+                        st.metric("Doubled", doubled)
+                    with col_d2:
+                        st.metric("Tripled", tripled)
+                    
+                    st.success(f"{test_num} × 2 = {doubled}")
+                    st.success(f"{test_num} × 3 = {tripled}")
         
         elif example_category == "String Functions":
             st.markdown("#### 📝 String Functions")
@@ -656,98 +662,68 @@ def capitalize_words(text):
                     capitalized = string_input.title()
                     st.info(f"{capitalized}")
         
-        elif example_category == "List Functions":
-            st.markdown("#### 📚 List Functions")
-            
-            st.code("""def find_max(numbers):
-    return max(numbers)
-
-def calculate_average(numbers):
-    return sum(numbers) / len(numbers)
-
-def remove_duplicates(items):
-    return list(set(items))""", language="python")
-            
-            list_input = st.text_input("Enter numbers (comma-separated):", value="5, 10, 15, 10, 20, 5", key="list_func_input")
-            
-            if st.button("📊 Analyze List", key="analyze_list_btn"):
-                try:
-                    numbers = [float(x.strip()) for x in list_input.split(",")]
-                    
-                    col_list1, col_list2, col_list3 = st.columns(3)
-                    
-                    with col_list1:
-                        st.metric("Maximum", max(numbers))
-                    with col_list2:
-                        st.metric("Average", round(sum(numbers) / len(numbers), 2))
-                    with col_list3:
-                        unique = list(set(numbers))
-                        st.metric("Unique Count", len(unique))
-                    
-                    st.code(f"Original: {numbers}\nUnique: {unique}", language="python")
-                except:
-                    st.error("Invalid input!")
-        
         elif example_category == "Validation Functions":
             st.markdown("#### ✅ Validation Functions")
             
             st.code("""def is_valid_email(email):
+    # Check if email has @ and .
     return "@" in email and "." in email
 
-def is_strong_password(password):
-    if len(password) < 8:
-        return False
-    has_digit = any(char.isdigit() for char in password)
-    has_upper = any(char.isupper() for char in password)
-    return has_digit and has_upper
+def is_long_enough(password):
+    # Check if password is at least 8 characters
+    return len(password) >= 8
 
-def is_adult(age):
-    return age >= 18""", language="python")
+def is_teenager(age):
+    # Check if age is between 13 and 19
+    return age >= 13 and age <= 19""", language="python")
             
             val_func = st.radio("Choose validator:", 
-                              ["Email", "Password", "Age"],
+                              ["Email", "Password Length", "Teenager Check"],
                               horizontal=True,
                               key="val_func_choice")
             
             if val_func == "Email":
                 email = st.text_input("Email:", value="user@example.com", key="email_val")
                 if st.button("✅ Validate Email", key="val_email_btn"):
-                    is_valid = "@" in email and "." in email
+                    has_at = "@" in email
+                    has_dot = "." in email
+                    is_valid = has_at and has_dot
+                    
+                    st.info(f"Has @ symbol: {has_at}")
+                    st.info(f"Has . symbol: {has_dot}")
+                    
                     if is_valid:
-                        st.success(f"✅ '{email}' is a valid email format")
+                        st.success(f"✅ '{email}' looks like a valid email!")
                     else:
-                        st.error(f"❌ '{email}' is NOT a valid email format")
+                        st.error(f"❌ '{email}' is missing @ or .")
             
-            elif val_func == "Password":
+            elif val_func == "Password Length":
                 password = st.text_input("Password:", value="MyPass123", type="password", key="pass_val")
-                if st.button("✅ Validate Password", key="val_pass_btn"):
-                    checks = {
-                        "Length ≥ 8": len(password) >= 8,
-                        "Has digit": any(char.isdigit() for char in password),
-                        "Has uppercase": any(char.isupper() for char in password)
-                    }
+                if st.button("✅ Check Length", key="val_pass_btn"):
+                    length = len(password)
+                    is_long = length >= 8
                     
-                    all_valid = all(checks.values())
+                    st.info(f"Password length: {length} characters")
                     
-                    for check, passed in checks.items():
-                        if passed:
-                            st.success(f"✅ {check}")
-                        else:
-                            st.error(f"❌ {check}")
-                    
-                    if all_valid:
-                        st.success("🎉 Strong password!")
+                    if is_long:
+                        st.success(f"✅ Password is long enough (≥8 characters)")
                     else:
-                        st.warning("⚠️ Weak password")
+                        st.error(f"❌ Password too short! Need at least 8 characters")
+                        st.caption(f"You need {8 - length} more character(s)")
             
-            elif val_func == "Age":
+            elif val_func == "Teenager Check":
                 age = st.number_input("Age:", value=15, min_value=0, max_value=120, key="age_val")
                 if st.button("✅ Check Age", key="val_age_btn"):
-                    is_adult = age >= 18
-                    if is_adult:
-                        st.success(f"✅ Age {int(age)} is adult (≥18)")
+                    is_teenager = age >= 13 and age <= 19
+                    
+                    if is_teenager:
+                        st.success(f"✅ Age {int(age)} is a teenager (13-19)")
                     else:
-                        st.info(f"ℹ️ Age {int(age)} is minor (<18)")
+                        st.info(f"ℹ️ Age {int(age)} is not a teenager")
+                        if age < 13:
+                            st.caption("Too young to be a teenager")
+                        else:
+                            st.caption("Too old to be a teenager")
     
     # Key takeaways
     st.markdown("---")
@@ -778,46 +754,70 @@ def is_adult(age):
     # Practice exercises
     with st.expander("💪 Practice Exercises", expanded=False):
         st.markdown("""
-        **Try these challenges:**
+        **Try these fun challenges:**
         
-        1. **Temperature Converter:**
+        1. **Make a Greeter:**
         ```python
-        def convert_temperature(temp, from_unit, to_unit):
-            # Convert between F, C, K
-            pass
+        def greet_person(name, age):
+            # Create a greeting message
+            return f"Hi {name}, you are {age} years old!"
+        
+        # Test it:
+        print(greet_person("Emma", 10))
         ```
         
-        2. **Grade Calculator:**
+        2. **Calculate Pizza Cost:**
         ```python
-        def calculate_grade(score):
-            # Return letter grade (A, B, C, D, F)
-            if score >= 90:
-                return "A"
-            # ... complete it!
-        ```
-        
-        3. **List Statistics:**
-        ```python
-        def get_stats(numbers):
-            # Return min, max, average, median
-            return min_val, max_val, avg, median
-        ```
-        
-        4. **Password Generator:**
-        ```python
-        def generate_password(length, include_numbers=True, include_symbols=False):
-            # Generate random password with options
-            pass
-        ```
-        
-        5. **Shopping Cart Total:**
-        ```python
-        def calculate_total(prices, tax_rate=0.08, discount=0):
-            # Calculate total with tax and discount
-            subtotal = sum(prices)
-            tax = subtotal * tax_rate
-            total = subtotal + tax - discount
+        def pizza_cost(num_slices, price_per_slice=3):
+            # Calculate total cost of pizza slices
+            total = num_slices * price_per_slice
             return total
+        
+        # Test it:
+        print(pizza_cost(4))      # Uses default $3 per slice
+        print(pizza_cost(4, 2.5)) # Custom price $2.50 per slice
+        ```
+        
+        3. **Check if Even or Odd:**
+        ```python
+        def is_even(number):
+            # Return True if even, False if odd
+            if number % 2 == 0:
+                return True
+            else:
+                return False
+        
+        # Test it:
+        print(is_even(10))  # True
+        print(is_even(7))   # False
+        ```
+        
+        4. **Make a Rectangle:**
+        ```python
+        def draw_rectangle(width, height, symbol="*"):
+            # Print a rectangle pattern
+            for i in range(height):
+                print(symbol * width)
+        
+        # Test it:
+        draw_rectangle(5, 3)
+        # Output:
+        # *****
+        # *****
+        # *****
+        ```
+        
+        5. **Convert Minutes to Hours:**
+        ```python
+        def minutes_to_hours(minutes):
+            # Convert minutes to hours and remaining minutes
+            hours = minutes // 60
+            remaining_minutes = minutes % 60
+            return hours, remaining_minutes
+        
+        # Test it:
+        h, m = minutes_to_hours(150)
+        print(f"{h} hours and {m} minutes")  # 2 hours and 30 minutes
         ```
         """)
 
